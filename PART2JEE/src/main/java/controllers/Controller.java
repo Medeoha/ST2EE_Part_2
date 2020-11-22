@@ -9,6 +9,7 @@ import Models.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,13 +36,16 @@ public class Controller extends HttpServlet {
         Ttest = new TeacherTest();
         listOfTeacher = new ArrayList<>();
         listOfTeacher.addAll(Ttest.getallTeacher());
-          for(Teacher t : listOfTeacher)
+          for(Teacher t :  listOfTeacher)
           {
               if("Pixel".equals(t.getLogin()) && "jetit".equals(t.getPassword()))
               {
                   request.getSession().setAttribute("key_User", t);
                   request.getRequestDispatcher("welcome.jsp").forward(request, response);
+                
+
               }
+            
           }
     }
 

@@ -48,8 +48,8 @@ public class EvalSheet implements Serializable {
     @Column(name = "eval_sheet_done")
     private Boolean evalSheetDone;
     
-    @OneToOne
-    @JoinColumn(name = "eval_sheet_id")   
+    @OneToOne(mappedBy="eval_sheet", cascade=CascadeType.ALL)
+    //@JoinColumn(name = "eval_sheet_id")   
     private Mission mission;
     
     public EvalSheet() {

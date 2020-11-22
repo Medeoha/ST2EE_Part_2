@@ -69,8 +69,8 @@ public class Mission implements Serializable {
     @Column(name = "key_word")
     private String keyWord;
 
-    @OneToOne
-    @JoinColumn(name = "mission_id")
+    @OneToOne(mappedBy="mission", cascade=CascadeType.ALL)
+    //@JoinColumn(name = "mission_id")
     private Intern intern;
     
     @OneToOne//(fetch = FetchType.LAZY , mappedBy = "eval_sheet_id")

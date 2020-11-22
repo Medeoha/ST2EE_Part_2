@@ -61,7 +61,7 @@ public class InfoIntern implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date birthday;
     
-    @OneToOne
+    @OneToOne(mappedBy = "info_intern")
     @JoinColumn(name = "info_intern_id")
     private Intern intern;
 

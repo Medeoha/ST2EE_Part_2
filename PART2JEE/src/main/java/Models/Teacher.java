@@ -49,7 +49,7 @@ public class Teacher implements Serializable {
     @Size(max = 255)
     private String password;
     
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")   
     private Set<Intern> interns;
     

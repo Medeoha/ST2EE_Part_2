@@ -36,15 +36,15 @@ public class Intern implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mission_id", insertable = true, updatable = true)
     private Mission mission;
     
-    @OneToOne
-    @JoinColumn(name = "info_id", insertable = true, updatable = true)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "info_intern_id", insertable = true, updatable = true)
     private InfoIntern info_intern;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id", insertable = true, updatable = true)
     private Teacher teacher;
 

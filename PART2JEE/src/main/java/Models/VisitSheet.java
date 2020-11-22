@@ -38,8 +38,8 @@ public class VisitSheet implements Serializable {
     private Boolean visitPlanned;
     @Column(name = "visit_done")
     private Boolean visitDone;
-    @OneToOne
-    @JoinColumn(name = "visit_sheet_id")   
+    @OneToOne(mappedBy="visit_sheet", cascade=CascadeType.ALL)
+   // @JoinColumn(name = "visit_sheet_id")   
     private Mission mission;
 
     public VisitSheet() {
