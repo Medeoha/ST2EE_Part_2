@@ -32,7 +32,7 @@ public class Controller extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Aled");
+        Ttest = new TeacherTest();
         listOfTeacher = new ArrayList<>();
         listOfTeacher.addAll(Ttest.getallTeacher());
           for(Teacher t : listOfTeacher)

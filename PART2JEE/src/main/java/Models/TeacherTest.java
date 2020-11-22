@@ -16,14 +16,21 @@ import javax.persistence.*;
 @Stateless
 public class TeacherTest {
    
-    @PersistenceContext
-    EntityManager em;
+    EntityManagerFactory emf;
+    EntityManager em ;
     
     public List getallTeacher()
     {
-  
-       Query q = em.createNamedQuery("Teacher.findAll", Teacher.class);
-       return q.getResultList();
+       emf =  Persistence.createEntityManagerFactory("my_persistence_unit");
+       em = emf.createEntityManager();
+       em.getTransaction().begin();
+       Query q = em.createNamedQuery("Teacher.findAll", Teacher.class);      
+       List<Teacher> listOfTeachers = q.getResultList();
+        
+       em.close();
+       emf.close();
+              
+       return listOfTeachers;
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,7 +49,7 @@ public class Teacher implements Serializable {
     @Size(max = 255)
     private String password;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")   
     private Set<Intern> interns;
     
