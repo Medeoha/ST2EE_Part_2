@@ -4,6 +4,7 @@
     Author     : narut
 --%>
 
+<%@page import="java.util.Set"%>
 <%@page import="Models.*"%>
 <%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,21 +21,14 @@
             Simply reaching this page means that your JPA is working
             properly! </h1>
         <span style="color: blue; font-weight: bold; font-size: 24"
-              > Your login is: ${key_User.firstname} </span> <br/>
+              > Your FirstName is: ${key_User.firstname} </span> <br/>
         <span style="color: blue; font-weight: bold; font-size: 24"
-              > Your password is: ${key_User.lastname} </span>
+              > Your LastName is: ${key_User.lastname} </span><br/>
                       <span style="color: blue; font-weight: bold; font-size: 24"
-              > Your password is: ${key_User.interns} </span>
-              <%-- <span style="color: blue; font-weight: bold; font-size: 24"
-                    key_User.interns.next().info_intern.lastname
-                    > Your password is: <% Teacher key_User = (Teacher)request.getAttribute("key_User");
-                                            Iterator it = key_User.getInterns().iterator();
-                                            while(it.hasNext())
-                                            {
-                                               Intern yes = (Intern) it.next();
-                                               String test = yes.getInfo_intern().getFirstname();
-                                               out.print(test);
-                                            }%></span> --%>
+              > Yours interns are: ${key_User.interns} </span>
+               <span style="color: blue; font-weight: bold; font-size: 24"
+                  
+                    > Your first student name is:${key_User.interns.iterator().next().getInfo_intern().getFirstname()}   </span>
 
     </body>
 </html>
