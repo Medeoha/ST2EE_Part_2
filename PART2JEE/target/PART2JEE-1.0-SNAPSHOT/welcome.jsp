@@ -58,7 +58,7 @@
                                 %><%out.println(i.getInfo_intern().getFirstname());%></br><% %>
                             
                             <tr>
-                                <form name="TableFormIndex" method="post" action="Table">
+                                <form name="TableFormIndex" method="get" action="ControllerDB">
 
                                     <input type="hidden" name="id_student" value="" />
                                 <td><input type="text" name="GroupStudent" value=" <%out.print(i.getInfo_intern().getInternGroup());%>" />
@@ -69,48 +69,63 @@
                                </td><!-- String -->
                                 <td>
                                     <input type="checkbox" id="cdc" name="cdc"
+                                           <%out.print(i.getInfo_intern().getFirstname());%>
                                 </td>
                                 <!-- String -->
                                 <td>
-                                    <input type="checkbox" id="fiche_visite" name="fiche_visite"/>
+                                    <input type="checkbox" id="fiche_visite" name="fiche_visite"
+                                           <%if(i.getMission().getVisit_sheet()!=null)
+                                           {
+                                                %>checked<%
+                                                        };%>/>
 
 
                                 </td><!-- String -->
                                 <td>
-                                    <input type="checkbox" id="fiche_eval" name="fiche_eval"/>
+                                    <input type="checkbox" id="fiche_eval" name="fiche_eval"
+                                            <%if(i.getMission().getEval_sheet()!=null)
+                                           {
+                                                %>checked<%
+                                                        };%>/>
 
                                 </td><!-- String -->
-                                <td>
-                                    <input type="checkbox" id="sondage" name="sondage"/>
-
-                                </td><!-- String -->
-                                <td>
-                                    <input type="checkbox" id="sondage" name="sondage"/>    
-                                </td><!-- String -->
+                           
+       
                                 <td>
                                     <input type="checkbox" id="soutenance" name="soutenance"/>
+                                      <%if(i.getMission().getSoutenance()!=null)
+                                           {
+                                                %>checked<%
+                                                        };%> 
+                                </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="plannif" name="plannif" 
+                                            <%if(i.getMission().getVisit_sheet().getVisitPlanned()!=null)
+                                           {
+                                                %>checked<%
+                                                        };%>/>
 
                                 </td><!-- String -->
                                 <td>
-                                    <input type="checkbox" id="plannif" name="plannif"/>
-
-                                </td><!-- String -->
-                                <td>
-                                    <input type="checkbox" id="faite" name="faite"/>
+                                    <input type="checkbox" id="faite" name="faite"
+                                            <%if(i.getMission().getVisit_sheet().getVisitDone()!=null)
+                                           {
+                                                %>checked<%
+                                                        };%>/>
 
                                 </td><!-- String -->
                                 <td><input type="text" name="Debut" value=" <%out.print(i.getMission().getStartMission());%>" /></td><!-- String -->
-                                <td><input type="text" name="Fin" value="" /></td><!-- String -->
+                                <td><input type="text" name="Fin" value="<%out.print(i.getMission().getEndMission());%>" /></td><!-- String -->
                                 <td><input type="text" name="NomEntreprise" value="" /></td><!-- String -->
                                 <td><input type="text" name="Mds" value="" /></td><!-- String -->
-                                <td><input type="text" name="AdresseEntreprise" value="" /></td><!-- String -->
-                                <td><input type="text" name="NoteTech" value="" /></td><!-- String -->
-                                <td><input type="text" name="NoteCom" value="" /></td><!-- String -->
+                                <td><input type="text" name="Adresse" value="<%out.print(i.getInfo_intern().getAddress());%>" /></td><!-- String -->
+                                <td><input type="text" name="NoteTech" value="<%out.print(i.getMission().getEval_sheet().getGradeTech());%>" /></td><!-- String -->
+                                <td><input type="text" name="NoteCom" value="<%out.print(i.getMission().getEval_sheet().getGradeCom());%>" /></td><!-- String -->
                                 <td><input type="submit" name="submit" value="Valid Edit"/></td>
 
                                 </form>
-                                <form name="TableFormIndex" method="post" action="Detail">
-                                    <input type="hidden" name="id_student" value="" />
+                                <form name="Actual_intern" method="post" action="ControllerDB">
+                                    <input type="hidden" name="Intern" value="i" />
                                     <td><input type="submit" name="detail" value="Detail"/></td>
                                 </form>
                             </tr>
