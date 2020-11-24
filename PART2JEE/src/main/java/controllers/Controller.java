@@ -40,20 +40,13 @@ public class Controller extends HttpServlet {
         Ttest = new TeacherTest();
         listOfTeacher = new ArrayList<>();
         listOfTeacher.addAll(Ttest.getallTeacher());
-        Teacher t2 = new Teacher(5,"Vincent", "Masson","123","123");
-        emf =  Persistence.createEntityManagerFactory("my_persistence_unit");
-        TeacherJpaController tmp = new TeacherJpaController(emf);
+
           for(Teacher t :  listOfTeacher)
           {
               if(request.getParameter("loginForm").equals(t.getLogin()) && request.getParameter("pwdForm").equals(t.getPassword()))
               {
-                  
-                  
-                  emf.close();
                   request.getSession().setAttribute("key_User", t);
                   request.getRequestDispatcher("welcome.jsp").forward(request, response);
-                
-
               }
                         
           }

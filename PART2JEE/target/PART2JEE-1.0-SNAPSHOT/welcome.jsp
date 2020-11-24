@@ -9,6 +9,125 @@
 <%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: etienne
+  Date: 12/11/2020
+  Time: 17:04
+  To change this template use File | Settings | File Templates.
+--%>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form name="Recherche" method="post" action="TableSearch">
+    <td><input type="text" name="search" /></td>
+    <td><input type="submit" name="search" value="Search"/></td>
+</form>
+<form name="LogOut" method="post" action="Logout">
+    <td><input type="submit" name="detail" value="Log Out"/></td>
+</form>
+    <table>
+        <tr>
+            <td>Group</td>
+            <td>Last Name</td>
+            <td>Cdc</td>
+            <td>Fiche visite</td>
+            <td>Fiche eval</td>
+            <td>Sondage</td>
+            <td>Rapport</td>
+            <td>Soutenance</td>
+            <td>Plannif</td>
+            <td>Faite</td>
+            <td>Stage Date debut</td>
+            <td>Stage Date fin</td>
+            <td>Entreprise nom</td>
+            <td>Maitre de stage</td>
+            <td>Entreprise adresse</td>
+            <td>Note technique</td>
+            <td>Notet com</td>
+        </tr>
+        <c:forEach>
+             <%
+                            Teacher a = (Teacher)request.getSession().getAttribute("key_User");
+                            
+                            for(Intern i : a.getInterns())
+                            {
+                                %><%out.println(i.getInfo_intern().getFirstname());%></br><% %>
+                            
+                            <tr>
+                                <form name="TableFormIndex" method="post" action="Table">
+
+                                    <input type="hidden" name="id_student" value="" />
+                                <td><input type="text" name="GroupStudent" value=" <%out.print(i.getInfo_intern().getInternGroup());%>" />
+
+                                </td><!-- String -->
+                                <td><input type="text" name="LastNameStudent" value=" <%out.print(i.getInfo_intern().getFirstname());%>"   />
+                                   
+                               </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="cdc" name="cdc"
+                                </td>
+                                <!-- String -->
+                                <td>
+                                    <input type="checkbox" id="fiche_visite" name="fiche_visite"/>
+
+
+                                </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="fiche_eval" name="fiche_eval"/>
+
+                                </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="sondage" name="sondage"/>
+
+                                </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="sondage" name="sondage"/>    
+                                </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="soutenance" name="soutenance"/>
+
+                                </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="plannif" name="plannif"/>
+
+                                </td><!-- String -->
+                                <td>
+                                    <input type="checkbox" id="faite" name="faite"/>
+
+                                </td><!-- String -->
+                                <td><input type="text" name="Debut" value=" <%out.print(i.getMission().getStartMission());%>" /></td><!-- String -->
+                                <td><input type="text" name="Fin" value="" /></td><!-- String -->
+                                <td><input type="text" name="NomEntreprise" value="" /></td><!-- String -->
+                                <td><input type="text" name="Mds" value="" /></td><!-- String -->
+                                <td><input type="text" name="AdresseEntreprise" value="" /></td><!-- String -->
+                                <td><input type="text" name="NoteTech" value="" /></td><!-- String -->
+                                <td><input type="text" name="NoteCom" value="" /></td><!-- String -->
+                                <td><input type="submit" name="submit" value="Valid Edit"/></td>
+
+                                </form>
+                                <form name="TableFormIndex" method="post" action="Detail">
+                                    <input type="hidden" name="id_student" value="" />
+                                    <td><input type="submit" name="detail" value="Detail"/></td>
+                                </form>
+                            </tr>
+                                         <%   }%></br><% 
+                                            out.println("FIN, CE PROFESSEUR POSSEDE " + a.getInterns().size() + " ETUDIANTS");
+
+                            %>     
+
+                     <%%>                          
+        </c:forEach>
+    </table>
+
+</body>
+
+
+<%--
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;
@@ -43,4 +162,4 @@
     </span>
 
     </body>
-</html>
+</html>--%>
