@@ -33,10 +33,9 @@
         <tr>
             <td>Group</td>
             <td>Last Name</td>
-            <td>Cdc</td>
+            
             <td>Fiche visite</td>
             <td>Fiche eval</td>
-            <td>Sondage</td>
             <td>Rapport</td>
             <td>Soutenance</td>
             <td>Plannif</td>
@@ -45,7 +44,7 @@
             <td>Stage Date fin</td>
             <td>Entreprise nom</td>
             <td>Maitre de stage</td>
-            <td>Entreprise adresse</td>
+            <td>Adresse</td>
             <td>Note technique</td>
             <td>Notet com</td>
         </tr>
