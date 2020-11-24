@@ -57,6 +57,7 @@ public class Controller extends HttpServlet {
               }
                         
           }
+          System.out.println("ERROR");
           request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
