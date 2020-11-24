@@ -34,10 +34,11 @@
                             for(Intern i : a.getInterns())
                             {
                                 out.println(i.getInfo_intern().getFirstname());%></br><% 
-                            }
+                            }%></br><% 
+                                out.println("FIN, CE PROFESSEUR POSSEDE " + a.getInterns().size() + " ETUDIANTS");
                         
                      %>
-                    Your first student name is:${key_User.getInterns().iterator().next().getInfo_intern().getFirstname()} <br/>
+                   
                    
     </span>
 
