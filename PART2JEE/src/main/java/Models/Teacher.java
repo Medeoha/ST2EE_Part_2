@@ -6,6 +6,7 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -76,7 +77,7 @@ public class Teacher implements Serializable {
         this.password = password;
         this.interns = null;
     }
-                public Teacher( String firstname, String lastname, String login, String password) {
+        public Teacher( String firstname, String lastname, String login, String password) {
       
         this.firstname = firstname;
         this.lastname = lastname;

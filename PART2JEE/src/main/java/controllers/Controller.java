@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
         TeacherJpaController tmp = new TeacherJpaController(emf);
           for(Teacher t :  listOfTeacher)
           {
-              if("Pixel".equals(t.getLogin()) && "jetit".equals(t.getPassword()))
+              if(request.getParameter("loginForm").equals(t.getLogin()) && request.getParameter("pwdForm").equals(t.getPassword()))
               {
                   
                   tmp.create(t2);
@@ -55,9 +55,9 @@ public class Controller extends HttpServlet {
                 
 
               }
-              emf.close();
-            
+                        
           }
+          request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

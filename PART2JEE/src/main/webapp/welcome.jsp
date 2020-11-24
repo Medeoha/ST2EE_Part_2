@@ -27,8 +27,11 @@
                       <span style="color: blue; font-weight: bold; font-size: 24"
               > Yours interns are: ${key_User.interns} </span>
                <span style="color: blue; font-weight: bold; font-size: 24"
-                  
-                    > Your first student name is:${key_User.interns.iterator().next().getInfo_intern().getFirstname()}   </span>
+> 
+
+                    Your first student name is:${key_User.getInterns().iterator().next().getInfo_intern().getFirstname()} <br/>
+                   
+    </span>
 
     </body>
 </html>
