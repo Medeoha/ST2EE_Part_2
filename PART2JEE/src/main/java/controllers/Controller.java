@@ -48,7 +48,7 @@ public class Controller extends HttpServlet {
               if(request.getParameter("loginForm").equals(t.getLogin()) && request.getParameter("pwdForm").equals(t.getPassword()))
               {
                   
-                  tmp.create(t2);
+                  
                   emf.close();
                   request.getSession().setAttribute("key_User", t);
                   request.getRequestDispatcher("welcome.jsp").forward(request, response);

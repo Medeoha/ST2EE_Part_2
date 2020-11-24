@@ -25,10 +25,18 @@
         <span style="color: blue; font-weight: bold; font-size: 24"
               > Your LastName is: ${key_User.lastname} </span><br/>
                       <span style="color: blue; font-weight: bold; font-size: 24"
-              > Yours interns are: ${key_User.interns} </span>
+              > Yours interns are: ${key_User.getInterns()} </span>
                <span style="color: blue; font-weight: bold; font-size: 24"
-> 
-
+>                  </br>
+                     <%
+                            Teacher a = (Teacher)request.getSession().getAttribute("key_User");
+                            
+                            for(Intern i : a.getInterns())
+                            {
+                                out.println(i.getInfo_intern().getFirstname());%></br><% 
+                            }
+                        
+                     %>
                     Your first student name is:${key_User.getInterns().iterator().next().getInfo_intern().getFirstname()} <br/>
                    
     </span>
