@@ -68,6 +68,22 @@ public class Teacher implements Serializable {
         this.password = password;
         this.interns = interns;
     }
+        public Teacher(Integer id, String firstname, String lastname, String login, String password) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.login = login;
+        this.password = password;
+        this.interns = null;
+    }
+                public Teacher( String firstname, String lastname, String login, String password) {
+      
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.login = login;
+        this.password = password;
+        this.interns = null;
+    }
     
     public Integer getId() {
         return id;

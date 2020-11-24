@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,21 +33,29 @@ public class Controller extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+     */EntityManagerFactory emf;
+     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Ttest = new TeacherTest();
         listOfTeacher = new ArrayList<>();
         listOfTeacher.addAll(Ttest.getallTeacher());
+        Teacher t2 = new Teacher(5,"Vincent", "Masson","123","123");
+        emf =  Persistence.createEntityManagerFactory("my_persistence_unit");
+        TeacherJpaController tmp = new TeacherJpaController(emf);
           for(Teacher t :  listOfTeacher)
           {
               if("Pixel".equals(t.getLogin()) && "jetit".equals(t.getPassword()))
               {
+                  
+                  tmp.create(t2);
+                  emf.close();
                   request.getSession().setAttribute("key_User", t);
                   request.getRequestDispatcher("welcome.jsp").forward(request, response);
                 
 
               }
+              emf.close();
             
           }
     }
