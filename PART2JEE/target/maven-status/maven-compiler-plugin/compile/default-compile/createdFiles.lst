@@ -4,6 +4,7 @@ Models\exceptions\NonexistentEntityException.class
 Models\EvalSheetJpaController.class
 Models\Mission.class
 utils\CONSTANT.class
+controllers\ControllerDB.class
 Models\InfoIntern.class
 Models\exceptions\PreexistingEntityException.class
 Models\InfoInternJpaController.class
