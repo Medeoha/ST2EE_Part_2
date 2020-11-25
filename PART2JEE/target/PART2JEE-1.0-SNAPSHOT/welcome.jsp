@@ -54,7 +54,7 @@
                             
                             for(Intern i : a.getInterns())
                             {
-                                %></br><% %>
+                                %><%out.println(i.getInfo_intern().getFirstname());%></br><% %>
                             
                             <tr>
                                 <form name="TableFormIndex" method="get" action="ControllerDB">
