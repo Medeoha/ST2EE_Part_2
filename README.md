@@ -36,6 +36,7 @@
 	-Server Domain (ongler Server): domain1
 	-Username (server tab): remove the user name which is left by default and leave the space blank.
 	-Deploy at the server startup (Deployment tab): + -> Artifacts -> ProjectSoloA8:war
+	-Check use custom context, remove the "/" and leave the location empty (Deployment tab)
 	-Apply
 	
 -To launch the project
