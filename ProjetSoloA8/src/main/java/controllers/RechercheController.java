@@ -27,13 +27,13 @@ public class RechercheController extends HttpServlet {
         String current_id_string = request.getParameter("Search_id");
         System.out.println(current_id_string);
         int current_id_teacher = Integer.parseInt(current_id_string);
-
         EntityManagerFactory emf =  Persistence.createEntityManagerFactory("my_persistence_unit");
+        //We retrieve the studied teacher
         TeacherJpaController cteacher = new TeacherJpaController(emf);
         Teacher t  = cteacher.findTeacher(current_id_teacher);
         request.getSession().setAttribute("Search_key", t);
         request.getSession().setAttribute("ContainSearch",c);
-
+        //returns the teacher who logged in and the search word to search.jsp
         request.getRequestDispatcher(SEARCH_VIEW_PATH).forward(request, response);
     }
 }

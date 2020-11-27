@@ -173,9 +173,9 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 --
 
 INSERT INTO `teacher` (`id`, `firstname`, `lastname`, `login`, `password`) VALUES
-(1, 'Jean', 'Petit', 'Pixel', 'jetit'),
-(2, 'Nicolas', 'Thomas', 'azerty', 'azerty'),
-(3, 'Nicolas', 'Huge', 'azerqsdf', 'azerqsdf');
+(1, 'Jean', 'Petit', 'adm', 'adm'),
+(2, 'Nicolas', 'Thomas', '123', '123'),
+(3, 'Nicolas', 'Huge', 'azerty', 'azerty');
 
 -- --------------------------------------------------------
 
@@ -205,11 +205,4 @@ SET GLOBAL time_zone = '+1:00';
 --
 -- Structure de la vue `affichage`
 --
-DROP TABLE IF EXISTS `affichage`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `affichage`  AS  select `info_intern`.`lastname` AS `lastname`,`info_intern`.`address` AS `address`,`info_intern`.`intern_group` AS `intern_group`,`mission`.`eval_sheet_id` AS `eval_sheet`,`mission`.`visit_sheet_id` AS `visit_sheet`,`mission`.`report_title` AS `report_title`,`mission`.`soutenance` AS `soutenance`,`mission`.`start_mission` AS `start_mission`,`mission`.`end_mission` AS `end_mission`,`eval_sheet`.`grade_tech` AS `grade_tech`,`eval_sheet`.`grade_com` AS `grade_com`,`visit_sheet`.`visit_planned` AS `visit_planned`,`visit_sheet`.`visit_done` AS `visit_done` from (((((`intern` left join `teacher` on((`teacher`.`id` = `intern`.`id`))) left join `info_intern` on((`info_intern`.`id` = `intern`.`id`))) left join `mission` on((`mission`.`id` = `intern`.`id`))) left join `eval_sheet` on((`eval_sheet`.`id` = `mission`.`id`))) left join `visit_sheet` on((`visit_sheet`.`id` = `mission`.`id`))) where (`teacher`.`id` = 1) ;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

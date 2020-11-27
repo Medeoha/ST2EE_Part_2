@@ -39,9 +39,12 @@
                     </div>
                     <div class="footer">
                         <br></br>
-                        <div id="myDIV" class="validationerror">
-                            Identifiant ou mot de passe incorrect.
-                        </div>
+                        <% if(request.getAttribute("errMsg") != null)
+                        {%>
+
+                           <label>Identifiant ou mot de passe incorrect.</label>
+
+                        <% } %>
                         <button type="submit" class="btn-submit_me">
                             Connexion
                         </button>
@@ -51,31 +54,11 @@
         </div>
     </div>
 </body>
-<script>
+
 
 
 
 </html>
 
 
-
-
-
-
-<%--<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;
-              charset=UTF-8">
-        <title>JPA Tutorial - Home page</title>
-    </head>
-    <body>
-        <form action="Controller" >
-            Login : <input type="text" name="loginForm"
-                           value=""/><br/>
-            Password : <input type="text" name="pwdForm"
-                              value=""/><br/>
-            <input type="submit" name="btnOK" value="Login"/><br/>
-        </form>
-    </body>
-</html>--%>
 

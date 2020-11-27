@@ -20,6 +20,7 @@
 </head>
 
 <body style="overflow: hidden;">
+    
     <div class="header_me">
         <img src="../efrei-paris_110x40.png" alt="Efrei Paris" class="app-logo_me" />
         <form name="LogOut" method="post" action="LogOutController">
@@ -30,22 +31,23 @@
     <div class="login-page">
         <div class="container-students the-containers" style="overflow: auto;">
 
-            <table>
-                <tr style="background-color:#3978bb;position: -webkit-sticky;
-                position: sticky;top: 10px;color: whitesmoke;height: 100%;z-index:auto;">
+            <table style="border-spacing: 0;">
+                <tr style="color: whitesmoke;background-color: #366eaa;">
                     <td style="height:40px;" >Identifiant</td>
                     <td>Last Name</td>
                     <td>First Name</td>
                     <td>Groupe</td>
                     <td>Adresse</td>
-                    <td>Maître d'apprentissage</td>
+                    <td>Gerant du stage</td>
                     <td>Date de début</td>
                     <td>Date de fin</td>
                     <td>Description de la mission</td>
                     <td>Commentaires</td>
+                    <td style="width:500px"></td>
+                    <td style="width:500px"></td>
 
                 </tr>
-                <div class="yeet"></div>
+                
                 <%
             Intern i = (Intern) request.getAttribute("key_User");
         %><% %>
@@ -55,8 +57,8 @@
                 <!---Details Stagiaire -->
                 <input type="hidden" name="student_db_detail" value="<%=i.getId()%>" />
                 <td><label><%=i.getId()%></label></td>
-                <td><label><%=i.getInfo_intern().getLastname()%></label></td>
-                <td><label><%=i.getInfo_intern().getFirstname()%></label></td>
+                <td><input type="text" name="Last_name" value="<%=i.getInfo_intern().getLastname()%>" /></td>
+                <td><input type="text" name="First_name" value="<%=i.getInfo_intern().getFirstname()%>" /></td>
                 <td><label><%=i.getInfo_intern().getInternGroup()%></label></td>
                 <!---Details Stagiaire -->
                 <td><input type="text" name="Adresse" value="<%=i.getInfo_intern().getAddress()%>" /></td>
@@ -75,7 +77,7 @@
             </form>
 
 
-                </tr>
+       </tr>
 
 
 

@@ -68,27 +68,28 @@ public class ControllerDetail extends HttpServlet {
 
         }
         else{
-            response.sendRedirect("/Login");
+            response.sendRedirect("/Controller");
         }
+        //We get the intern
         String current_id_string_detail = request.getParameter("student_db_detail");
         int current_id = Integer.parseInt(current_id_string_detail);
         EntityManagerFactory emf =  Persistence.createEntityManagerFactory("my_persistence_unit");
         InternJpaController icontroller = new InternJpaController(emf);
         Intern current_intern = icontroller.findIntern(current_id);
-
-
-
-
+        //Entity controllers are created
         InfoInternJpaController iicontroller = new InfoInternJpaController(emf);
         InfoIntern current_info = iicontroller.findInfoIntern(current_intern.getInfo_intern().getId());
 
         MissionJpaController mcontroller = new MissionJpaController(emf);
         Mission current_mission = mcontroller.findMission(current_intern.getMission().getId());
 
+        //We update the entities
+        current_info.setLastname(request.getParameter("Last_name"));
+        current_info.setFirstname(request.getParameter("First_name"));
         current_info.setAddress(request.getParameter("Adresse"));
         current_mission.setMidInternshipMeetingInfo(request.getParameter("Description_mission"));
         current_mission.setCommentsOfTheIntern(request.getParameter("Description"));
-
+        //We update the db
         try {
             iicontroller.edit(current_info);
         } catch (Exception e) {
@@ -99,8 +100,7 @@ public class ControllerDetail extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //request.setAttribute("key_User", current_intern);
-       // request.getRequestDispatcher("Detail.jsp").forward(request, response);
+        //We go back to the page welcome
         response.sendRedirect("/Controller");
 
 
@@ -118,6 +118,7 @@ public class ControllerDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //We retrieve the internal one and send its information to detail.jsp
         String current_id_string = request.getParameter("intern_details");
         int current_id = Integer.parseInt(current_id_string);
         EntityManagerFactory emf =  Persistence.createEntityManagerFactory("my_persistence_unit");

@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
  * @author narut
  */
 public class ControllerDB extends HttpServlet {
@@ -33,15 +32,15 @@ public class ControllerDB extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -56,27 +55,23 @@ public class ControllerDB extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("token")!=null){
 
-        }
-        else{
-            response.sendRedirect("/LogOutController");
-        }
+
+        //create a new student by default
+        //associated with his professor
         String current_id_string = request.getParameter("teachere");
-        System.out.println("ICIIIIIII PUTAIN" + current_id_string);
-        System.out.println("ICIIIIIII PUTAIN" + current_id_string);
         int current_id = Integer.parseInt(current_id_string);
         Date date_random = null;
         try {
@@ -84,43 +79,29 @@ public class ControllerDB extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        EntityManagerFactory emf =  Persistence.createEntityManagerFactory("my_persistence_unit");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("my_persistence_unit");
         TeacherJpaController tcontroller = new TeacherJpaController(emf);
         Teacher current_teacher = tcontroller.findTeacher(current_id);
 
-        VisitSheet vs = new VisitSheet(false,false);
+        VisitSheet vs = new VisitSheet(false, false);
 
-        EvalSheet es = new EvalSheet("Defaut", 1,1,false);
-        
-        InfoIntern in = new InfoIntern("Defaut", "Defaut", "Defaut", "Defaut", "Defaut", "Defaut", date_random );
-        Mission mission = new Mission(1900,date_random,date_random,"Defaut","Defaut","Defaut",false,"Defaut",es, vs);
-        Intern intern = new Intern(mission,in,current_teacher);
+        EvalSheet es = new EvalSheet("Defaut", 1, 1, false);
 
-       InfoInternJpaController iicontroller = new InfoInternJpaController(emf);
-       // InfoIntern current_info = iicontroller.findInfoIntern(in.getId());
+        InfoIntern in = new InfoIntern("Defaut", "Defaut", "Defaut", "Defaut", "Defaut", "Defaut", date_random);
+        Mission mission = new Mission(1900, date_random, date_random, "Defaut", "Defaut", "Defaut", false, "Defaut", es, vs);
+        Intern intern = new Intern(mission, in, current_teacher);
 
+        InfoInternJpaController iicontroller = new InfoInternJpaController(emf);
         VisitSheetJpaController vscontroller = new VisitSheetJpaController(emf);
-        //VisitSheet current_vs = vscontroller.findVisitSheet(vs.getId());
-
         EvalSheetJpaController escontroller = new EvalSheetJpaController(emf);
-       // EvalSheet current_es = escontroller.findEvalSheet(es.getId());
-
         MissionJpaController mcontroller = new MissionJpaController(emf);
-       // Mission current_mission = mcontroller.findMission(mission.getId());
-
         InternJpaController icontroller = new InternJpaController(emf);
-        //Intern current_intern = icontroller.findIntern(intern.getId());
 
         iicontroller.create(in);
         escontroller.create(es);
         vscontroller.create(vs);
         mcontroller.create(mission);
         icontroller.create(intern);
-        /*Ttest = new TeacherTest();
-        listOfTeacher = new ArrayList<>();
-        listOfTeacher.addAll(Ttest.getallTeacher());
-        request.setAttribute("key_User", listOfTeacher);*/
-        //request.getRequestDispatcher("welcome.jsp").forward(request, response);
         response.sendRedirect("/Controller");
 
 
@@ -129,30 +110,25 @@ public class ControllerDB extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("token")!=null){
 
-        }
-        else{
-            response.sendRedirect("/LogOutController");
-        }
-
-
+        //We pick up the studied trainee
         String current_id_string = request.getParameter("eleve_db");
         System.out.println(current_id_string);
         int current_id_intern = Integer.parseInt(current_id_string);
 
 
-
-        EntityManagerFactory emf =  Persistence.createEntityManagerFactory("my_persistence_unit");
+        //We create controllers for all entities
+        //And we retrieve the entities
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("my_persistence_unit");
         InternJpaController icontroller = new InternJpaController(emf);
         Intern current_intern = icontroller.findIntern(current_id_intern);
 
@@ -168,43 +144,34 @@ public class ControllerDB extends HttpServlet {
         MissionJpaController mcontroller = new MissionJpaController(emf);
         Mission current_mission = mcontroller.findMission(current_intern.getMission().getId());
 
-        current_info.setInternGroup(request.getParameter("GroupStudent").replaceAll("\\s",""));
-        current_info.setFirstname(request.getParameter("LastNameStudent").replaceAll("\\s",""));
+
+        //We update the student
+        current_info.setInternGroup(request.getParameter("GroupStudent").replaceAll("\\s", ""));
+        current_info.setLastname(request.getParameter("LastNameStudent").replaceAll("\\s", ""));
 
 
-
-
-        if(request.getParameter("soutenance") != null)
-        {
+        if (request.getParameter("soutenance") != null) {
             current_mission.setSoutenance(true);
-        }
-        else
-        {
+        } else {
             current_mission.setSoutenance(false);
         }
 
         /*--------------------------------------------------------------------------*/
-        if(request.getParameter("plannif") != null)
-        {
+        if (request.getParameter("plannif") != null) {
             current_vs.setVisitPlanned(true);
-        }
-        else
-        {
+        } else {
             current_vs.setVisitPlanned(false);
         }
-        if(request.getParameter("faite") != null)
-        {
+        if (request.getParameter("faite") != null) {
             current_vs.setVisitDone(true);
-        }
-        else
-        {
+        } else {
             current_vs.setVisitDone(false);
         }
 
         try {
 
-            current_mission.setStartMission(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("Debut")) );
-            current_mission.setEndMission(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("Fin")) );
+            current_mission.setStartMission(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("Debut")));
+            current_mission.setEndMission(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("Fin")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -216,7 +183,7 @@ public class ControllerDB extends HttpServlet {
 
         current_es.setGradeCom(notecom);
         current_es.setGradeTech(notetech);
-        /*--------------------EDIT PART---------------------------*/
+        /*--------------------We update the DB---------------------------*/
         try {
             escontroller.edit(current_es);
         } catch (Exception e) {
@@ -238,10 +205,7 @@ public class ControllerDB extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //request.getSession().setAttribute("key_User", current_intern.getTeacher());
-        //request.getRequestDispatcher("welcome.jsp").forward(request, response);
         response.sendRedirect("/Controller");
-
 
 
     }

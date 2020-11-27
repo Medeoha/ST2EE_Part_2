@@ -23,6 +23,7 @@
         <%
             Teacher a = (Teacher) request.getSession().getAttribute("Search_key");
             String contain = (String)request.getSession().getAttribute("ContainSearch");
+            contain = contain.toLowerCase();
         %>
 <div class="header_me">
         <img src="../efrei-paris_110x40.png" alt="Efrei Paris" class="app-logo_me" />
@@ -32,16 +33,14 @@
         <br>
         <form style="display: flex;padding:10px;"id= "searchbox" method= "get" action= "RechercheController" >
             <input name= "Search_value" type= "text " size= "30" placeholder= "Type here… " />
-            <input  type="hidden" name="Search_id" value="<%=a.getId()%>">
+            <input  type="hidden" name="Search_id" value="<%=a.getId()%>"/>
             <input style="padding:-10px;" class="btn-submit_me" id= "button-submit" type= "submit" value= "Search " />
             </form>
     </div>
     <div class="login-page">
-        <div class="container-students the-containers" style="overflow-y:scroll">
-            
+        <div class="container-students the-containers" style="overflow-y:scroll"> 
             <table >
-                <tr style="background-color:#3978bb;position: -webkit-sticky;
-                position: sticky;top: 10px;color: whitesmoke;height: 100%;z-index:auto;">
+                <tr style="background-color:#3978bb;color: whitesmoke;height: 100%;">
                     <td style="height:40px;">Groupe</td>
                     <td>Nom</td>
                     <td>Fiche visite</td>
@@ -63,7 +62,8 @@
             type="submit" name="Nouveau Stagiaire" value="Nouveau Stagiaire" />
 </form><%
             for (Intern i : a.getInterns()) {
-                if(i.getInfo_intern().getLastname().contains(contain) || i.getInfo_intern().getFirstname().contains(contain) || i.getMission().getStartMission().toString().contains(contain) || i.getMission().getKeyWord().contains(contain)  ){
+                //filter
+                if(i.getInfo_intern().getLastname().toLowerCase().contains(contain) || i.getInfo_intern().getFirstname().toLowerCase().contains(contain) || i.getMission().getStartMission().toString().contains(contain) || i.getMission().getCommentsOfTheIntern().toLowerCase().contains(contain)  ){
         %>
 
             <form name="TableFormIndex" method="post" action="ControllerDB">

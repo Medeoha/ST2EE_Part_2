@@ -6,6 +6,7 @@
 package controllers;
 
 import Models.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ import static Constants.Constantes.LOGIN_VIEW_PATH;
 import static Constants.Constantes.WELCOME_VIEW_PATH;
 
 /**
- *
  * @author narut
  */
 public class Controller extends HttpServlet {
@@ -37,8 +37,9 @@ public class Controller extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */EntityManagerFactory emf;
-     
+     */
+    EntityManagerFactory emf;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         /*Ttest = new TeacherTest();
@@ -67,23 +68,23 @@ public class Controller extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("token") == null)
+        if (session.getAttribute("token") == null) // If the user isn't connected load the login page
         {
             request.getRequestDispatcher(LOGIN_VIEW_PATH).forward(request, response);
-        }
-        else {
+        } else {
             doPost(request, response);
         }
 
@@ -91,14 +92,13 @@ public class Controller extends HttpServlet {
     }
 
 
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -107,24 +107,22 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession();
         listOfTeacher = new ArrayList<>();
         listOfTeacher.addAll(Ttest.getallTeacher());
-        if(session.getAttribute("token")==null) {
+        if (session.getAttribute("token") == null) {
             request.getSession().setAttribute("loginForme", request.getParameter("loginForm"));
             request.getSession().setAttribute("pwdForme", request.getParameter("pwdForm"));
         }
 
-        for(Teacher t :  listOfTeacher)
-        {
-            //if(request.getParameter("loginForm").equals(t.getLogin()) && request.getParameter("pwdForm").equals(t.getPassword()))
-            if(request.getSession().getAttribute("loginForme").equals(t.getLogin()) && request.getSession().getAttribute("pwdForme").equals(t.getPassword()))
+        for (Teacher t : listOfTeacher) {
+            if (request.getSession().getAttribute("loginForme").equals(t.getLogin()) && request.getSession().getAttribute("pwdForme").equals(t.getPassword())) //if login & pwd are correct , the user can access the database
             {
-
-                session.setAttribute("token",t.getId());
+                //the id of the teacher who logged in becomes a token that allows him to connect to the rest of the application and modify the database.
+                session.setAttribute("token", t.getId());
                 request.getSession().setAttribute("key_User", t);
                 request.getRequestDispatcher(WELCOME_VIEW_PATH).forward(request, response);
             }
 
         }
-        System.out.println("ERROR");
+        request.setAttribute("errMsg", "Error");
         request.getRequestDispatcher(LOGIN_VIEW_PATH).forward(request, response);
     }
 
