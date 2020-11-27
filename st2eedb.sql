@@ -199,7 +199,9 @@ INSERT INTO `visit_sheet` (`id`, `visit_planned`, `visit_done`) VALUES
 (1, 1, 1);
 
 -- --------------------------------------------------------
-
+CREATE USER 'adm'@'localhost' IDENTIFIED BY 'adm';
+GRANT ALL PRIVILEGES ON * . * TO 'adm'@'localhost';
+SET GLOBAL time_zone = '+1:00';
 --
 -- Structure de la vue `affichage`
 --

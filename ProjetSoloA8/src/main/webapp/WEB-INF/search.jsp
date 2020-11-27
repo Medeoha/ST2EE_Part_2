@@ -32,7 +32,7 @@
         <br>
         <form style="display: flex;padding:10px;"id= "searchbox" method= "get" action= "RechercheController" >
             <input name= "Search_value" type= "text " size= "30" placeholder= "Type here… " />
-            <input  type="hidden" name="Search_id" value="<%=a.getId()%>"
+            <input  type="hidden" name="Search_id" value="<%=a.getId()%>">
             <input style="padding:-10px;" class="btn-submit_me" id= "button-submit" type= "submit" value= "Search " />
             </form>
     </div>
