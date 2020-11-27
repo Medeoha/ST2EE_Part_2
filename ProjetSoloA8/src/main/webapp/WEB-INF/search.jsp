@@ -21,23 +21,20 @@
 
 <body style="overflow:hidden">
         <%
-            Teacher a = (Teacher) request.getSession().getAttribute("key_User");
+            Teacher a = (Teacher) request.getSession().getAttribute("Search_key");
+            String contain = (String)request.getSession().getAttribute("ContainSearch");
         %>
 <div class="header_me">
         <img src="../efrei-paris_110x40.png" alt="Efrei Paris" class="app-logo_me" />
-
         <form name="LogOut" method="post" action="LogOutController">
             <td><input class="btn-submit_me" type="submit" name="detail" value="Log Out" /></td>
         </form>
         <br>
-
-
-
         <form style="display: flex;padding:10px;"id= "searchbox" method= "get" action= "RechercheController" >
             <input name= "Search_value" type= "text " size= "30" placeholder= "Type here… " />
             <input  type="hidden" name="Search_id" value="<%=a.getId()%>"
             <input style="padding:-10px;" class="btn-submit_me" id= "button-submit" type= "submit" value= "Search " />
-        </form>
+            </form>
     </div>
     <div class="login-page">
         <div class="container-students the-containers" style="overflow-y:scroll">
@@ -66,6 +63,7 @@
             type="submit" name="Nouveau Stagiaire" value="Nouveau Stagiaire" />
 </form><%
             for (Intern i : a.getInterns()) {
+                if(i.getInfo_intern().getLastname().contains(contain) || i.getInfo_intern().getFirstname().contains(contain) || i.getMission().getStartMission().toString().contains(contain) || i.getMission().getKeyWord().contains(contain)  ){
         %>
 
             <form name="TableFormIndex" method="post" action="ControllerDB">
@@ -144,7 +142,7 @@
 
 
 
-                    <%   }%>
+                    <%  } }%>
 
 
             </table>

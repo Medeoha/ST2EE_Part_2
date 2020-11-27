@@ -19,6 +19,10 @@
         <servlet-name>ControllerDetail</servlet-name>
         <servlet-class>controllers.ControllerDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RechercheController</servlet-name>
+        <servlet-class>controllers.RechercheController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
@@ -34,6 +38,10 @@
     <servlet-mapping>
         <servlet-name>LogOutController</servlet-name>
         <url-pattern>/LogOutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RechercheController</servlet-name>
+        <url-pattern>/RechercheController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
