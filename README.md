@@ -29,11 +29,15 @@
 	-Name (onglet server) : GlassFish 5.1.0
 	-Application server (onglet server) : recherchezle chemin vers l'endroit où vous avez installé votre glassfish sur votre ordinateur
 	-URL (onglet Server)  : http://localhost:8080/Controller
-	-JRE (onglet Server) : Utilisez si il n'est pas par défaut le JAVA 1.8.0.271 
+	-JRE (onglet Server) : Utilisez si il n'est pas par défaut le JAVA 1.8.0_271 
 	-Server Domain (ongler Server) : domain1
 	-Username (onglet server) : retirez e user name qui est laissé par défaut et laisser l'espace blanc
 	-Deploy at the server startup (onglet Deployment) : + -> Artifacts -> ProjetSoloA8:war
 	-Apply
+	
+-Pour lancer le projet
+	- Ouvrir projet 
+	- Selectionnez le projet 
 	
 	
 	Vous pouvez normalement lancer le projet !
