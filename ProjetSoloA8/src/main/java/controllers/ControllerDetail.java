@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static Constants.Constantes.DETAILS_VIEW_PATH;
+
 /**
  *
  * @author narut
@@ -122,7 +124,7 @@ public class ControllerDetail extends HttpServlet {
         InternJpaController icontroller = new InternJpaController(emf);
         Intern current_teacher = icontroller.findIntern(current_id);
         request.setAttribute("key_User", current_teacher);
-        request.getRequestDispatcher("Detail.jsp").forward(request, response);
+        request.getRequestDispatcher(DETAILS_VIEW_PATH).forward(request, response);
 
     }
 

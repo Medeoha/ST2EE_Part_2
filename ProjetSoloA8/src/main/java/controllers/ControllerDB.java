@@ -68,13 +68,11 @@ public class ControllerDB extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ArrayList<Teacher> listOfTeacher;
-        TeacherTest Ttest;
         if (session.getAttribute("token")!=null){
 
         }
         else{
-            response.sendRedirect("/Login");
+            response.sendRedirect("/LogOutController");
         }
         String current_id_string = request.getParameter("teachere");
         System.out.println("ICIIIIIII PUTAIN" + current_id_string);
@@ -144,7 +142,7 @@ public class ControllerDB extends HttpServlet {
 
         }
         else{
-            response.sendRedirect("/Login");
+            response.sendRedirect("/LogOutController");
         }
 
 

@@ -19,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static Constants.Constantes.LOGIN_VIEW_PATH;
+import static Constants.Constantes.WELCOME_VIEW_PATH;
+
 /**
  *
  * @author narut
@@ -38,7 +41,7 @@ public class Controller extends HttpServlet {
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Ttest = new TeacherTest();
+        /*Ttest = new TeacherTest();
         HttpSession session = request.getSession();
         listOfTeacher = new ArrayList<>();
         listOfTeacher.addAll(Ttest.getallTeacher());
@@ -60,7 +63,7 @@ public class Controller extends HttpServlet {
                         
           }
           System.out.println("ERROR");
-          request.getRequestDispatcher("index.jsp").forward(request, response);
+          request.getRequestDispatcher("index.jsp").forward(request, response);*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,8 +78,19 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("token") == null)
+        {
+            request.getRequestDispatcher(LOGIN_VIEW_PATH).forward(request, response);
+        }
+        else {
+            doPost(request, response);
+        }
+
+
     }
+
+
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -89,7 +103,29 @@ public class Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Ttest = new TeacherTest();
+        HttpSession session = request.getSession();
+        listOfTeacher = new ArrayList<>();
+        listOfTeacher.addAll(Ttest.getallTeacher());
+        if(session.getAttribute("token")==null) {
+            request.getSession().setAttribute("loginForme", request.getParameter("loginForm"));
+            request.getSession().setAttribute("pwdForme", request.getParameter("pwdForm"));
+        }
+
+        for(Teacher t :  listOfTeacher)
+        {
+            //if(request.getParameter("loginForm").equals(t.getLogin()) && request.getParameter("pwdForm").equals(t.getPassword()))
+            if(request.getSession().getAttribute("loginForme").equals(t.getLogin()) && request.getSession().getAttribute("pwdForme").equals(t.getPassword()))
+            {
+
+                session.setAttribute("token",t.getId());
+                request.getSession().setAttribute("key_User", t);
+                request.getRequestDispatcher(WELCOME_VIEW_PATH).forward(request, response);
+            }
+
+        }
+        System.out.println("ERROR");
+        request.getRequestDispatcher(LOGIN_VIEW_PATH).forward(request, response);
     }
 
     /**
