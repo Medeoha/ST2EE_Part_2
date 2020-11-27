@@ -32,16 +32,14 @@
         <br>
         <form style="display: flex;padding:10px;"id= "searchbox" method= "get" action= "RechercheController" >
             <input name= "Search_value" type= "text " size= "30" placeholder= "Type here… " />
-            <input  type="hidden" name="Search_id" value="<%=a.getId()%>">
+            <input  type="hidden" name="Search_id" value="<%=a.getId()%>"/>
             <input style="padding:-10px;" class="btn-submit_me" id= "button-submit" type= "submit" value= "Search " />
             </form>
     </div>
     <div class="login-page">
-        <div class="container-students the-containers" style="overflow-y:scroll">
-            
+        <div class="container-students the-containers" style="overflow-y:scroll"> 
             <table >
-                <tr style="background-color:#3978bb;position: -webkit-sticky;
-                position: sticky;top: 10px;color: whitesmoke;height: 100%;z-index:auto;">
+                <tr style="background-color:#3978bb;color: whitesmoke;height: 100%;">
                     <td style="height:40px;">Groupe</td>
                     <td>Nom</td>
                     <td>Fiche visite</td>

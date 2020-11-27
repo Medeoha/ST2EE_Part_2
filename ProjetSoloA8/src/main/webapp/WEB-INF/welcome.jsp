@@ -20,10 +20,10 @@
 </head>
 
 <body style="overflow:hidden">
-        <%
+    <%
             Teacher a = (Teacher) request.getSession().getAttribute("key_User");
         %>
-<div class="header_me">
+    <div class="header_me">
         <img src="../efrei-paris_110x40.png" alt="Efrei Paris" class="app-logo_me" />
 
         <form name="LogOut" method="post" action="LogOutController">
@@ -33,18 +33,22 @@
 
 
 
-        <form style="display: flex;padding:10px;"id= "searchbox" method= "get" action= "RechercheController" >
-            <input name= "Search_value" type= "text " size= "30" placeholder= "Type here… " />
-            <input  type="hidden" name="Search_id" value="<%=a.getId()%>"
-            <input style="padding:-10px;" class="btn-submit_me" id= "button-submit" type= "submit" value= "Search " />
+        <form style="display: flex;padding:10px;" id="searchbox" method="get" action="RechercheController">
+            <input name="Search_value" type="text " size="30" placeholder="Type here… " />
+            <input type="hidden" name="Search_id" value="<%=a.getId()%>" />
+            <input style="padding:-10px;" class="btn-submit_me" id="button-submit" type="submit" value="Search " />
+        </form>
+        <form name="Actual_intern" method="get" action="ControllerDB">
+            <input type="hidden" name="teachere" value="<%=a.getId()%>" />
+            <input class="btn-submit_me ccc" type="submit" name="Nouveau Stagiaire"
+                value="Nouveau Stagiaire" />
         </form>
     </div>
     <div class="login-page">
         <div class="container-students the-containers" style="overflow-y:scroll">
             
-            <table >
-                <tr style="background-color:#3978bb;position: -webkit-sticky;
-                position: sticky;top: 10px;color: whitesmoke;height: 100%;z-index:auto;">
+            <table style="border-spacing: 0;" >
+                <tr style="    font-weight: bold;color: whitesmoke;background-color: #366eaa;height:40px;padding-left:40px">
                     <td style="height:40px;">Groupe</td>
                     <td>Nom</td>
                     <td>Fiche visite</td>
@@ -57,94 +61,95 @@
                     <td>Adresse</td>
                     <td>Note tech</td>
                     <td>Note comm</td>
+                    <td style="width:500px"></td>
+                    <td style="width:500px"></td>
+                    
                 </tr>
-                <div class="yeet"></div>
 
-           <form name="Actual_intern" method="get" action="ControllerDB">
-    <input  type="hidden" name="teachere" value="<%=a.getId()%>" />
-    <input style="width:200px;"class="btn-submit_me ccc"
-            type="submit" name="Nouveau Stagiaire" value="Nouveau Stagiaire" />
-</form><%
+
+                <%
             for (Intern i : a.getInterns()) {
         %>
 
-            <form name="TableFormIndex" method="post" action="ControllerDB">
+                <form name="TableFormIndex" method="post" action="ControllerDB">
 
-                
-         <tr style="overflow-y:scroll">       
 
-                <input  type="hidden" name="eleve_db" value= "<%=i.getId()%>" />
-                    <td><input size="5" class="input-form" type="text" name="GroupStudent"
-                            value=" <%out.print(i.getInfo_intern().getInternGroup());%>" />
+                    <tr style="overflow-y:scroll">
 
-                    </td><!-- String -->
-                    <td><input style="margin-left:5px;" class="input-form" type="text" name="LastNameStudent"
-                            value=" <%out.print(i.getInfo_intern().getFirstname());%>" />
+                        <input type="hidden" name="eleve_db" value="<%=i.getId()%>" />
+                        <td><input size="5" class="input-form" type="text" name="GroupStudent"
+                                value=" <%out.print(i.getInfo_intern().getInternGroup());%>" />
 
-                    </td><!-- String -->
+                        </td><!-- String -->
+                        <td><input style="margin-left:5px;" class="input-form" type="text" name="LastNameStudent"
+                                value=" <%out.print(i.getInfo_intern().getLastname());%>" />
 
-                    <!-- String -->
-                    <td>
-                        <input type="checkbox" id="fiche_visite" name="fiche_visite" <%if (i.getMission().getVisit_sheet() != null) {
+                        </td><!-- String -->
+
+                        <!-- String -->
+                        <td>
+                            <input type="checkbox" id="fiche_visite" name="fiche_visite" <%if (i.getMission().getVisit_sheet() != null) {
                            %>checked disabled="disabled" <%
                         };%> />
 
 
-                    </td><!-- String -->
-                    <td>
-                        <input type="checkbox" id="fiche_eval" name="fiche_eval" <%if (i.getMission().getEval_sheet() != null) {
+                        </td><!-- String -->
+                        <td>
+                            <input type="checkbox" id="fiche_eval" name="fiche_eval" <%if (i.getMission().getEval_sheet() != null) {
                            %>checked disabled="disabled" <%
                         };%> />
 
-                    </td><!-- String -->
+                        </td><!-- String -->
 
 
-                    <td>
-                        <input type="checkbox" id="soutenance" name="soutenance" <%if (i.getMission().getSoutenance().booleanValue()) {
+                        <td>
+                            <input type="checkbox" id="soutenance" name="soutenance" <%if (i.getMission().getSoutenance().booleanValue()) {
                            %>checked<%
                         };%> />
-                    </td><!-- String -->
-                    <td>
-                        <input type="checkbox" id="plannif" name="plannif" <%if (i.getMission().getVisit_sheet().getVisitPlanned().booleanValue()) {
-                           %>checked<%
-                        };%> />
-
-                    </td><!-- String -->
-                    <td>
-                        <input type="checkbox" id="faite" name="faite" <%if (i.getMission().getVisit_sheet().getVisitDone().booleanValue()) {
+                        </td><!-- String -->
+                        <td>
+                            <input type="checkbox" id="plannif" name="plannif" <%if (i.getMission().getVisit_sheet().getVisitPlanned().booleanValue()) {
                            %>checked<%
                         };%> />
 
-                    </td><!-- String -->
-                    <td><input  type="text" maxlength="10" size="10" class="input-form" name="Debut"
-                            value=" <%out.print(new java.sql.Date(i.getMission().getStartMission().getTime()));%>" />
-                    </td>
-                    <!-- String -->
-                    <td><input type="text" maxlength="10" size="10" class="input-form" name="Fin"
-                            value="<%out.print(new java.sql.Date((i.getMission().getEndMission()).getTime()));%>" />
-                    </td>
-                    <!-- String -->
-                    <td><input type="text" class="input-form" name="Adresse"
-                            value="<%out.print(i.getInfo_intern().getAddress());%>" />
-                    </td>
-                    <!-- String -->
-                    <td><input type="text" maxlength="4" size="4" class="input-form" name="NoteTech"
-                            value="<%out.print(i.getMission().getEval_sheet().getGradeTech());%>" /></td><!-- String -->
-                    <td><input type="text" maxlength="4" size="4" class="input-form" name="NoteCom"
-                            value="<%out.print(i.getMission().getEval_sheet().getGradeCom());%>" /></td><!-- String -->
-                    <td><input style="margin-left:5px;" class="btn-submit_me" type="submit" name="submit"
-                            value="Valid Edit" /></td>
-                    </form>
-                    <form name="detail" method="post" action="ControllerDetail">
-                        <input type="hidden" name="intern_details" value="<%=i.getId()%>" />
-                        <td><input style="margin-left:5px;" class="btn-submit_me" type="submit" name="Details"
-                                value="Details" /></td>
-                    </form>
-                    </tr>
+                        </td><!-- String -->
+                        <td>
+                            <input type="checkbox" id="faite" name="faite" <%if (i.getMission().getVisit_sheet().getVisitDone().booleanValue()) {
+                           %>checked<%
+                        };%> />
+
+                        </td><!-- String -->
+                        <td><input type="text" maxlength="10" size="10" class="input-form" name="Debut"
+                                value=" <%out.print(new java.sql.Date(i.getMission().getStartMission().getTime()));%>" />
+                        </td>
+                        <!-- String -->
+                        <td><input type="text" maxlength="10" size="10" class="input-form" name="Fin"
+                                value="<%out.print(new java.sql.Date((i.getMission().getEndMission()).getTime()));%>" />
+                        </td>
+                        <!-- String -->
+                        <td><input type="text" class="input-form" name="Adresse"
+                                value="<%out.print(i.getInfo_intern().getAddress());%>" />
+                        </td>
+                        <!-- String -->
+                        <td><input type="text" maxlength="4" size="4" class="input-form" name="NoteTech"
+                                value="<%out.print(i.getMission().getEval_sheet().getGradeTech());%>" /></td>
+                        <!-- String -->
+                        <td><input type="text" maxlength="4" size="4" class="input-form" name="NoteCom"
+                                value="<%out.print(i.getMission().getEval_sheet().getGradeCom());%>" /></td>
+                        <!-- String -->
+                        <td><input style="margin-left:5px;" class="btn-submit_me" type="submit" name="submit"
+                                value="Valid Edit" /></td>
+                </form>
+                <form name="detail" method="post" action="ControllerDetail">
+                    <input type="hidden" name="intern_details" value="<%=i.getId()%>" />
+                    <td><input style="margin-left:5px;" class="btn-submit_me" type="submit" name="Details"
+                            value="Details" /></td>
+                </form>
+                </tr>
 
 
 
-                    <%   }%>
+                <%   }%>
 
 
             </table>
@@ -157,4 +162,5 @@
 
 
 </style>
+
 </html>

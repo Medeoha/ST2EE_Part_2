@@ -20,6 +20,7 @@
 </head>
 
 <body style="overflow: hidden;">
+    
     <div class="header_me">
         <img src="../efrei-paris_110x40.png" alt="Efrei Paris" class="app-logo_me" />
         <form name="LogOut" method="post" action="LogOutController">
@@ -30,9 +31,8 @@
     <div class="login-page">
         <div class="container-students the-containers" style="overflow: auto;">
 
-            <table>
-                <tr style="background-color:#3978bb;position: -webkit-sticky;
-                position: sticky;top: 10px;color: whitesmoke;height: 100%;z-index:auto;">
+            <table style="border-spacing: 0;">
+                <tr style="color: whitesmoke;background-color: #366eaa;">
                     <td style="height:40px;" >Identifiant</td>
                     <td>Last Name</td>
                     <td>First Name</td>
@@ -43,9 +43,11 @@
                     <td>Date de fin</td>
                     <td>Description de la mission</td>
                     <td>Commentaires</td>
+                    <td style="width:500px"></td>
+                    <td style="width:500px"></td>
 
                 </tr>
-                <div class="yeet"></div>
+                
                 <%
             Intern i = (Intern) request.getAttribute("key_User");
         %><% %>
