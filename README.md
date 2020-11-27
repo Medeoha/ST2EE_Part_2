@@ -5,7 +5,8 @@
 
 -Créer la base de donnée sur Wamp (MySQL 5.7.28)
 
-- Copier coller l'integralité du fichier .sql fournit pour creer la database
+- Copier coller l'integralité du fichier .sql fournit pour creer la database 
+		/!\ ATTENTION CE N'EST PAS LA MEME DATABASE QUE LA VERSION 1 /!\
 
 
 																				   
