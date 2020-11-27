@@ -15,7 +15,6 @@
     <meta http-equiv="content-language" content="fr-FR"/>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="app.css"/>
     <title>Efrei Paris - Connexion</title>
 </head>
 
@@ -27,16 +26,19 @@
                     <img src="efrei-paris_110x40.png" alt="Efrei Paris" class="app-logo_me"/>
                     <h2>Connexion</h2>
                 </div>
+                <br>
                 <form class="login-form_me" id="login-form_me"  action="Controller" method="post" accept-charset="UTF-8" novalidate>
-                    <div class="form-group label-floating">
+                    <div class="form-group">
                         <label class="control-label me" for="username">Identifiant</label>
                         <input id="username" type="text" name="loginForm" class="form-control" required/>
                     </div>
-                    <div class="form-group label-floating">
+                    <br></br>
+                    <div class="form-group">
                         <label class="control-label me" for="password">Mot de passe</label>
                         <input id="password" type="password" name="pwdForm" class="form-control" required/>
                     </div>
                     <div class="footer">
+                        <br></br>
                         <div id="myDIV" class="validationerror">
                             Identifiant ou mot de passe incorrect.
                         </div>

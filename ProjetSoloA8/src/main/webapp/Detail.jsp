@@ -1,9 +1,3 @@
-<%--
-    Document   : welcom
-    Created on : 22 nov. 2020, 14:27:12
-    Author     : narut
---%>
-
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Set"%>
 <%@page import="Models.*"%>
@@ -17,35 +11,44 @@
   Time: 17:04
   To change this template use File | Settings | File Templates.
 --%>
+
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-    <title>Title</title>
+    <title>EFREI Paris - Intern</title>
 </head>
-<body>
 
+<body style="overflow: hidden;">
+    <div class="header_me">
+        <img src="efrei-paris_110x40.png" alt="Efrei Paris" class="app-logo_me" />
+        <form name="LogOut" method="post" action="LogOutController">
+            <td><input class="btn-submit_me" type="submit" name="detail" value="Log Out" /></td>
+        </form>
+    </div>
 
-<form name="LogOut" method="post" action="LogOutController">
-    <td><input type="submit" name="detail" value="Log Out"/></td>
-</form>
-<table>
-    <tr>
-        <td>Identifiant</td>
-        <td>Last Name</td>
-        <td>First Name</td>
-        <td>Groupe</td>
-        <td>Adresse</td>
-        <td>Maître d'apprentissage</td>
-        <td>Date de début</td>
-        <td>Date de fin</td>
-        <td>Description de la mission</td>
-        <td>Commentaires</td>
+    <div class="login-page">
+        <div class="container-students the-containers" style="overflow: auto;">
 
-    </tr>
-    <c:forEach>
-        <%
+            <table>
+                <tr style="background-color:#3978bb;position: -webkit-sticky;
+                position: sticky;top: 10px;color: whitesmoke;height: 100%;z-index:auto;">
+                    <td style="height:40px;" >Identifiant</td>
+                    <td>Last Name</td>
+                    <td>First Name</td>
+                    <td>Groupe</td>
+                    <td>Adresse</td>
+                    <td>Maître d'apprentissage</td>
+                    <td>Date de début</td>
+                    <td>Date de fin</td>
+                    <td>Description de la mission</td>
+                    <td>Commentaires</td>
+
+                </tr>
+                <div class="yeet"></div>
+                <%
             Intern i = (Intern) request.getAttribute("key_User");
-        %></br><% %>
+        %><% %>
 
         <tr>
             <form name="Detail" method="get" action="ControllerDetail">
@@ -58,61 +61,28 @@
                 <!---Details Stagiaire -->
                 <td><input type="text" name="Adresse" value="<%=i.getInfo_intern().getAddress()%>" /></td>
                 <td><label><%=i.getTeacher().getLastname()%></label></td>
-                <td><label><%out.print(new java.sql.Date((i.getMission().getStartMission().getTime())));%></label></td>
-                <td><label><%out.print(new java.sql.Date((i.getMission().getEndMission()).getTime()));%></label></td>
-                <td><input type="text" name="Description_mission" value="<%=i.getMission().getMidInternshipMeetingInfo()%>" /></td>
-                <td><input type="text" name="Description" value="<%=i.getMission().getCommentsOfTheIntern()%>" /></td>
+                <td><label><%out.print(new java.sql.Date((i.getMission().getStartMission().getTime())));%></label>
+                </td>
+                <td><label><%out.print(new java.sql.Date((i.getMission().getEndMission()).getTime()));%></label>
+                </td>
+                <td><input type="text" name="Description_mission"
+                        value="<%=i.getMission().getMidInternshipMeetingInfo()%>" /></td>
+                <td><input type="text" name="Description" value="<%=i.getMission().getCommentsOfTheIntern()%>" />
+                </td>
 
-                <td><input type="submit" name="submit" value="Valid Edit"/></td>
+                <td><input class="btn-submit_me" type="submit" name="submit" value="Valid Edit" /></td>
 
             </form>
 
 
-        </tr>
+                </tr>
 
 
 
-    </c:forEach>
-
-</table>
+            </table>
+        </div>
+    </div>
 
 </body>
 
-
-<%--
-
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;
-              charset=UTF-8">
-        <title>JPA Tutorial - Welcome page</title>
-    </head>
-    <body>
-        <h1> <span style="color: red; font-weight: bold" >
-                Congratulations! </span><br/>
-            Simply reaching this page means that your JPA is working
-            properly! </h1>
-        <span style="color: blue; font-weight: bold; font-size: 24"
-              > Your FirstName is: ${key_User.firstname} </span> <br/>
-        <span style="color: blue; font-weight: bold; font-size: 24"
-              > Your LastName is: ${key_User.lastname} </span><br/>
-                      <span style="color: blue; font-weight: bold; font-size: 24"
-              > Yours interns are: ${key_User.getInterns()} </span>
-               <span style="color: blue; font-weight: bold; font-size: 24"
->                  </br>
-                     <%
-                            Teacher a = (Teacher)request.getSession().getAttribute("key_User");
-
-                            for(Intern i : a.getInterns())
-                            {
-                                out.println(i.getInfo_intern().getFirstname());%></br><%
-                            }%></br><%
-                                out.println("FIN, CE PROFESSEUR POSSEDE " + a.getInterns().size() + " ETUDIANTS");
-
-                     %>
-
-
-    </span>
-
-    </body>
-</html>--%>
+</html>
